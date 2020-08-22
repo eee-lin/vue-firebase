@@ -18,6 +18,7 @@ export default {
   name: "home",
   data() {
     return {
+      inputtext: "",
       tweets: [
         // こんな感じのデータが入る予定
         // {

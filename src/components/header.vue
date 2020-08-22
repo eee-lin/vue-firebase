@@ -1,11 +1,7 @@
 <template>
   <header>
-    <div v-if="user">
-      <button v-on:click="logOut">logOut</button>
-    </div>
-    <div v-else>
-      <button v-on:click="logIn">logIn</button>
-    </div>
+    <button v-if="user" v-on:click="logOut()">ログアウト</button>
+    <button v-else v-on:click="logIn()">ログイン</button>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -26,9 +22,9 @@ export default {
       //firebase loginしているかどうか
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          // this.user = user;
+          this.user = user;
         } else {
-          // No user is signed in.
+          this.user = null;
         }
       });
     },
@@ -40,11 +36,8 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(() => {
-          console.log("ログアウトしました");
-        })
-        .catch(error => {
-          console.log(`ログアウト時にエラーが発生しました (${error})`);
+        .then(function() {
+          console.log("ログアウト成功！");
         });
     },
   },
